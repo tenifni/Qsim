@@ -1,7 +1,8 @@
-\documentclass[preprint,superscriptaddress,amsmath,amssymb,aps,prl]{revtex4-1}
+\documentclass[preprint, superscriptaddress,amsmath,amssymb,aps,prl]{revtex4-1}
 
 \usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{physics}
 
 \newcommand{\add}[1]{\textcolor{blue}{#1}}
 \newcommand{\remove}[1]{\textcolor{red}{(#1)}}
@@ -15,19 +16,47 @@
 \affiliation{University of California Los Angeles}
 
 
-
 \date{\today}
 
 \begin{abstract}
-  We do cool stuff with mode locked lasers. 
+  Tony's DAMOP abstract as a starting point
 \end{abstract}
 
 \maketitle
 
-\includegraphics[scale = 0.5]{single_ion_uW_linescan_ML.pdf}
+\add{Background of standard state detection for hyperfine qubits/present other reasons why people may want to use ML lasers to address narrow band features}
+
+Standard state detection of a hyperfine qubit necessitates illumination by continuous wave lasers resonant with a closed cylcing transition that leaves the qubit intact. When initialized to the ``bright'' state, the ion will scatter photons that are typically collected by a photomultiplier tube (PMT) or an electron multiplying CCD camera (EMCCD). If the ion is prepared in the ``dark'' state, the ion will not fluoresce and no photons are collected. State detection time is limited by off resonant scattering of photons that mix the qubit basis states. Typical state detection times in $^{171}Yb^+$ are limited to about $\tau_{D} \sim$ few ms before the states become mixed.
+
+\add{Talk about the limiting factors of standard state detection}
+
+A limiting factor when state detecting in this manner is background scatter of the state detection beam collected by the photon measurement device. If the bright state does not scatter significantly more photons than the dark state, then background scatter will cause the dark state to appear bright, a source of state preparation and measurement infidelity. Efforts to mitigate this problem usually involve complicated imaging systems that limit the detection of photons 
+
+\add{Do the whole ``In this letter...'' stuff. Say what we did and how well it worked}
+
+In this Letter, we demonstrate the use of broadband pulses from a mode locked laser to resonantly excite the $\ket{1} = \mathbox{}^2S_{1/2}\ket{F = 1, m_f = 0} \rightarrow \mathbox{}^2P_{1/2}\ket{F = 0, m_f = 0}$ transition while suppressing the undesired $^2S_{1/2}\ket{F = 1, m_f = 0} \rightarrow \mathbox{}^2P_{1/2}\ket{F = 1, m_f}$ and $\ket{0} = \mathbox{}^2S_{1/2}\ket{F = 0, m_f = 0} \rightarrow \mathbox{}^2P_{1/2}\ket{F = 1, m_f}$ transitions.
+
+\add{Talk about the ML laser, what its spectrum looks like, how we filtered out the crap we dont want}
+
+The mode locked laser used in this Letter has a repetition rate of $\omega_{r} = 2\pi \times 81.547$ MHz, with a center wavelength of 369.5 nm. The bandwith of the comb ($\sim 50$ GHz) encapsulated the entire hyperfine structure of the cycling transitions ($\omega_{HFS} = 2\pi \times 12.641$ GHz, $\omega_{HFP} = 2\pi \times 2.105$ GHz), which typically would cause immediate mixing of the qubit as seen in figure XXX. To mitigate this, a Mach-Zehnder interferometer is used as a phase filter to cause detructive interference at judiciously chosen frequencies. This ``carves out'' the frequency comb spectrum that the ion experiences, suppressing frequency components at the undesired transitions.
+
+A microwave source addressed to the $\ket{0} \leftrightarrow \ket{1}$ transition at $\omega_{HFS} = 12.641281$ GHz is scanned in frequency with a constant interrogation time $\tau_\pi = 120 \mu\mathbox{s}$. 
+
+\begin{figure}
+  \includegraphics[scale = 0.5]{single_ion_uW_linescan_ML.pdf}
+  \caption{Microwave linescan of the qubit transition. The interferometer is first set to addres the state detection line, and then moved in phase to optimally suppress the state detection. At the incorrect phase, the mode locked laser optimally mixes the qubit states and produces no coherent signal.}
+\end{figure}
+
+
+\begin{figure}
+  \includegraphics[scale = 0.5]{single_ion_rabi_flopping_ML.pdf}
+  \caption{Microwave Rabi flopping of the qubit transition. The interferometer is first set to addres the state detection line, and then moved in phase to optimally suppress the state detection. At the incorrect phase, the mode locked laser optimally mixes the qubit states and produces no coherent signal.}
+\end{figure}
+
+\add{Acknowledgements}
 
 \begin{acknowledgments}
-  We would like to acknowledge all of the previous ballers who laid the groundwork for our ballin' work. 
+  We would like to acknowledge all of the previous ballers who laid the groundwork for our ballin' work. Ramsey, you my boy. Rabi, none of this would have been possible without you. Rest of y'all, you know who you are. 
 \end{acknowledgments}
 
 \bibliography{UltrafastStateDetection}
