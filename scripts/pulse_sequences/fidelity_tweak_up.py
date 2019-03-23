@@ -25,6 +25,8 @@ class fidelity_tweak_up(pulse_sequence):
         bright_prep = self.parameters.BrightStatePumping.bright_prep_method
         mode = self.parameters.Modes.state_detection_mode
 
+
+        #preparing F = 1 and readout
         self.addSequence(turn_off_all)
 
         if mode == 'Shelving':
@@ -34,6 +36,7 @@ class fidelity_tweak_up(pulse_sequence):
 
         self.addSequence(turn_off_all)
         self.addSequence(bright_state_pumping)
+        
         self.addSequence(turn_off_all)
 
         if mode == 'Standard':
@@ -44,10 +47,13 @@ class fidelity_tweak_up(pulse_sequence):
 
         elif mode == 'Shelving':
             self.addSequence(shelving)
+            self.addSequence(standard_state_detection)
             self.addSequence(shelving_state_detection)
 
         self.addSequence(turn_off_all)
 
+
+        #preparing F = 0 and readout
         if mode == 'Shelving':
             self.addSequence(shelving_doppler_cooling)
         else:
@@ -55,8 +61,8 @@ class fidelity_tweak_up(pulse_sequence):
 
         self.addSequence(turn_off_all)
         self.addSequence(optical_pumping)
+        
         self.addSequence(turn_off_all)
-
         if mode == 'Standard':
             self.addSequence(standard_state_detection)
     
@@ -65,5 +71,6 @@ class fidelity_tweak_up(pulse_sequence):
 
         elif mode == 'Shelving':
             self.addSequence(shelving)
+            self.addSequence(standard_state_detection)
             self.addSequence(shelving_state_detection)
 

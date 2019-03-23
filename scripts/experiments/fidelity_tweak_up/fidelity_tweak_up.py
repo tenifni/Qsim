@@ -57,15 +57,20 @@ class fidelity_tweak_up(QsimExperiment):
             i += 1
             if self.p.Modes.state_detection_mode == 'Shelving':
                 points_per_hist = self.p.StandardStateDetection.points_per_histogram
-                [counts_doppler_bright, counts_bright, counts_doppler_dark, counts_dark] = self.run_sequence(max_runs=250, num = 4)
+                [counts_doppler_bright, counts_bright_standard, counts_bright_shelving, counts_doppler_dark, counts_dark_standard, counts_dark_shelving] = self.run_sequence(max_runs=166, num = 6)
                 print counts_doppler_bright
-                bright_errors = np.where(counts_doppler_bright <= self.p.ShelvingDopplerCooling.doppler_counts_threshold)
+                bright_doppler_errors = np.where(counts_doppler_bright <= self.p.ShelvingDopplerCooling.doppler_counts_threshold)
+                bright_prep_errors = np.where(counts_bright_standard >= 3)
+                bright_errors = np.concatenate((bright_doppler_errors[0], bright_prep_errors[0]))
                 counts_bright = np.delete(counts_bright, bright_errors)
                 
-                dark_errors = np.where(counts_doppler_dark <= self.p.ShelvingDopplerCooling.doppler_counts_threshold)
+                dark_doppler_errors = np.where(counts_doppler_dark <= self.p.ShelvingDopplerCooling.doppler_counts_threshold)
+                dark_prep_errors = np.where(counts_dark_standard >= 3)
+                dark_errors = np.concatenate((dark_doppler_errors[0], dark_prep_errors[0]))
                 counts_dark = np.delete(counts_dark, dark_errors)
                 
-                print dark_errors, bright_errors
+                print 'Doppler errors', dark_doppler_errors, bright_doppler_errors
+                print 'Preparation errors', dark_prep_errors, bright_prep_errors
             else:
                 points_per_hist = self.p.StandardStateDetection.points_per_histogram
                 [counts_bright, counts_dark] = self.run_sequence(max_runs=500, num = 2)
