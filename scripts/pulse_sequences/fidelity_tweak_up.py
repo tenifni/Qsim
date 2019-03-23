@@ -48,6 +48,7 @@ class fidelity_tweak_up(pulse_sequence):
         elif mode == 'Shelving':
             self.addSequence(shelving)
             self.addSequence(standard_state_detection)
+            self.addSequence(turn_off_all)
             self.addSequence(shelving_state_detection)
 
         self.addSequence(turn_off_all)
@@ -60,10 +61,7 @@ class fidelity_tweak_up(pulse_sequence):
             self.addSequence(doppler_cooling)
 
         self.addSequence(turn_off_all)
-        self.addSequence(optical_pumping)
-        if mode == 'Shelving':
-            self.addSequence(standard_state_detection)
-        
+        self.addSequence(optical_pumping)        
         self.addSequence(turn_off_all)
         if mode == 'Standard':
             self.addSequence(standard_state_detection)
@@ -74,5 +72,6 @@ class fidelity_tweak_up(pulse_sequence):
         elif mode == 'Shelving':
             self.addSequence(shelving)
             self.addSequence(standard_state_detection)
+            self.addSequence(turn_off_all)
             self.addSequence(shelving_state_detection)
 

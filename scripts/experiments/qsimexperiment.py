@@ -123,7 +123,6 @@ class QsimExperiment(experiment):
             self.pulser.stop_sequence()
             counts = np.concatenate((counts, self.pulser.get_readout_counts()))
             self.pulser.reset_readout_counts()
-
         counts_parsed = []
         for i in range(num):
             counts_parsed.append(counts[i::num])

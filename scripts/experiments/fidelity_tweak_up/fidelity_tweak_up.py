@@ -57,22 +57,20 @@ class fidelity_tweak_up(QsimExperiment):
             i += 1
             if self.p.Modes.state_detection_mode == 'Shelving':
                 points_per_hist = self.p.StandardStateDetection.points_per_histogram
-                [counts_doppler_bright, counts_bright_standard, counts_bright_shelving, counts_doppler_dark, counts_OP_standard, counts_dark_standard, counts_dark_shelving] = self.run_sequence(max_runs=142, num = 7)
-                print counts_doppler_bright
+                [counts_doppler_bright, counts_bright_standard, counts_bright_shelving, counts_doppler_dark,  counts_dark_standard, counts_dark_shelving] = self.run_sequence(max_runs=160, num = 6)
                 bright_doppler_errors = np.where(counts_doppler_bright <= self.p.ShelvingDopplerCooling.doppler_counts_threshold)
-                bright_prep_errors = np.where(counts_bright_standard >= 3)
+                bright_prep_errors = np.where(counts_bright_standard >= 4)
                 bright_errors = np.concatenate((bright_doppler_errors[0], bright_prep_errors[0]))
-                counts_bright = np.delete(counts_bright, bright_errors)
+                counts_bright = np.delete(counts_bright_shelving, bright_errors)
                 
                 dark_doppler_errors = np.where(counts_doppler_dark <= self.p.ShelvingDopplerCooling.doppler_counts_threshold)
-                dark_prep_errors = np.where(counts_dark_standard >= 3)
-                dark_OP_errors = np.where(counts_OP_standard >= 3)
-                dark_errors = np.concatenate((dark_doppler_errors[0], dark_prep_errors[0], dark_OP_errors[0]))
-                counts_dark = np.delete(counts_dark, dark_errors)
+                dark_prep_errors = np.where(counts_dark_standard >= 4)
+                #dark_OP_errors = np.where(counts_OP_standard >= 3)
+                dark_errors = np.concatenate((dark_doppler_errors[0], dark_prep_errors[0]))
+                counts_dark = np.delete(counts_dark_shelving, dark_errors)
                 
                 print 'Doppler errors', dark_doppler_errors, bright_doppler_errors
                 print 'Preparation errors', dark_prep_errors, bright_prep_errors
-                print 'Optical Pumping Errors', dark_OP_errors
             else:
                 points_per_hist = self.p.StandardStateDetection.points_per_histogram
                 [counts_bright, counts_dark] = self.run_sequence(max_runs=500, num = 2)
