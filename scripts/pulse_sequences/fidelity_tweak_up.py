@@ -61,6 +61,8 @@ class fidelity_tweak_up(pulse_sequence):
 
         self.addSequence(turn_off_all)
         self.addSequence(optical_pumping)
+        if mode == 'Shelving':
+            self.addSequence(standard_state_detection)
         
         self.addSequence(turn_off_all)
         if mode == 'Standard':
